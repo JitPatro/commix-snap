@@ -1,5 +1,5 @@
 name: commix
-base: core20
+base: core22
 adopt-info: commix
 summary: Command Injection Exploiter
 description: |
@@ -52,15 +52,14 @@ parts:
   commix:
     plugin: python
     source: https://github.com/commixproject/commix.git
-    override-pull: |
-      snapcraftctl pull
-      #snapcraftctl set-version $(head -n 1 doc/CHANGELOG.md | awk -F " " '{ print $3$4 }' | awk -F '(' '{ print $1"-"$2 }' | awk -F ')' '{ print $1 }')
-      snapcraftctl set-version $(git describe --tags --long ) #| awk -F " " '{ print $1"-latest" }')
 
     override-build: |
-      snapcraftctl build
-      cp -r src/txt $SNAPCRAFT_PART_INSTALL/lib/python3.8/site-packages/src/
-      sed -i 's/usage = "python /usage = "/g' $SNAPCRAFT_PART_INSTALL/lib/python3.8/site-packages/src/utils/menu.py
+      craftctl default
+      craftctl set version=$(git describe --tags --long)
+      cp -r src/txt $CRAFT_PART_INSTALL/lib/python3.10/site-packages/src/
+      sed -i 's/usage = "python /usage = "/g' $CRAFT_PART_INSTALL/lib/python3.10/site-packages/src/utils/menu.py
+      rm -rf $CRAFT_PART_INSTALL/lib/python3.10/site-packages/{pip*,setuptools*,wheel*}
+      
 apps:
   commix:
     command: bin/commix
