@@ -58,6 +58,7 @@ parts:
       craftctl set version=$(git describe --tags --long)
       cp -r src/txt $CRAFT_PART_INSTALL/lib/python3.10/site-packages/src/
       sed -i 's/usage = "python /usage = "/g' $CRAFT_PART_INSTALL/lib/python3.10/site-packages/src/utils/menu.py
+      sed -i 's|OUTPUT_DIR = ".output/"|OUTPUT_DIR = "commix-output/"|g' $CRAFT_PART_INSTALL/lib/python3.10/site-packages/src/utils/settings.py
       rm -rf $CRAFT_PART_INSTALL/lib/python3.10/site-packages/{pip*,setuptools*,wheel*}
       
 apps:
