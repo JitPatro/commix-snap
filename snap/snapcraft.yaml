@@ -43,10 +43,22 @@ license: GPL-3.0-or-later
 source-code: https://github.com/commixproject/commix
 issues: https://github.com/commixproject/commix/issues
 
-architectures:
-  - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
+
+platforms:
+  amd64:
+    build-on: [amd64]
+  arm64:
+    build-on: [arm64]
+  armhf:
+    build-on: [armhf]
+  ppc64el:
+    build-on: [ppc64el]
+  s390x:
+    build-on: [s390x]
+# architectures:
+#   - build-on: amd64
+#   - build-on: arm64
+#   - build-on: armhf
 
 parts:
   commix:
